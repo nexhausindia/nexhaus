@@ -840,13 +840,30 @@ const App = (function () {
     }
 
     function initContact() {
-        const form = document.querySelector('#contact form');
+        const form = document.getElementById('contact-form');
         if (!form) return;
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Thank you for your message. We will get back to you shortly.');
-            form.reset();
+            const data = new FormData(form);
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Thank you! Your message has been sent.');
+                    form.reset();
+                } else {
+                    alert('Oops! There was a problem sending your message.');
+                }
+            } catch (error) {
+                alert('Oops! There was a problem sending your message.');
+            }
         });
     }
 

@@ -27,6 +27,15 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -89,6 +98,9 @@ h6 {
 
 h1 {
     font-size: 3.5rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 h2 {
@@ -313,18 +325,24 @@ h3 {
 }
 
 .gallery-item {
-    flex: 0 0 400px;
-    height: 300px;
-    scroll-snap-align: start;
+    flex: 0 0 auto;
+    /* Allow auto width based on image */
+    height: 70vh;
+    /* Responsive height */
+    max-height: 500px;
+    scroll-snap-align: center;
     border-radius: 4px;
-    /* Optional, keep clean */
     overflow: hidden;
+    position: relative;
 }
 
 .gallery-item img {
-    width: 100%;
+    width: auto;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    /* Ensure full image is visible */
+    background: #000;
+    /* Dark background for letterboxing */
 }
 
 /* Custom Scrollbar for Gallery */
@@ -501,7 +519,10 @@ button:hover {
 
     /* Container Adjustments */
     .container {
-        padding: 0 1.5rem;
+        padding: 0 1.25rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     /* Navigation */
@@ -597,8 +618,23 @@ button:hover {
 
     .expander-header button {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .project-details-expander {
+        padding: 1.5rem 1rem;
+        /* Reduced padding */
+    }
+
+    .project-gallery {
+        gap: 0.5rem;
+    }
+
+    .gallery-item {
+        height: 50vh;
+        /* Smaller height for mobile */
+        max-height: 400px;
     }
 
     /* Footer */

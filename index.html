@@ -38,15 +38,19 @@
         <h2 style="margin-bottom: 3rem; font-weight: 300; text-align: center;">Get in Touch</h2>
 
         <div class="grid contact-grid">
-            <form class="auth-form" style="max-width: 100%; display: flex; flex-direction: column; gap: 1rem;">
-                <input type="text" placeholder="Name" required style="padding: 1rem; border: 1px solid #ddd;">
-                <input type="email" placeholder="Email" required style="padding: 1rem; border: 1px solid #ddd;">
-                <select style="padding: 1rem; border: 1px solid #ddd;">
-                    <option>General Enquiry</option>
-                    <option>New Project</option>
-                    <option>Press</option>
+            <form id="contact-form" action="https://formspree.io/f/xykyoydw" method="POST" class="auth-form"
+                style="max-width: 100%; display: flex; flex-direction: column; gap: 1rem;">
+                <input type="text" name="name" placeholder="Name" required
+                    style="padding: 1rem; border: 1px solid #ddd;">
+                <input type="email" name="email" placeholder="Email" required
+                    style="padding: 1rem; border: 1px solid #ddd;">
+                <select name="subject" style="padding: 1rem; border: 1px solid #ddd;">
+                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="New Project">New Project</option>
+                    <option value="Press">Press</option>
                 </select>
-                <textarea rows="5" placeholder="Message" style="padding: 1rem; border: 1px solid #ddd;"></textarea>
+                <textarea name="message" rows="5" placeholder="Message"
+                    style="padding: 1rem; border: 1px solid #ddd;"></textarea>
                 <button type="submit"
                     style="padding: 1rem; background: #000; color: #fff; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Send
                     Message</button>
@@ -60,11 +64,20 @@
                         src="https://maps.google.com/maps?q=9.912631155672113,76.29361196753203&t=&z=15&ie=UTF8&iwloc=&output=embed">
                     </iframe>
                 </div>
-                <div style="text-align: right; color: var(--secondary-text); font-size: 0.9rem; line-height: 1.6;">
-                    <strong style="color: var(--text-color); text-transform: uppercase; letter-spacing: 0.05em;">NexHaus
-                        Architects</strong><br>
-                    Pambaimoola, Edakochi<br>
-                    Ernakulam, Kerala
+                <div
+                    style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
+                    <div style="text-align: left; color: var(--secondary-text); font-size: 0.9rem; line-height: 1.6;">
+                        <strong
+                            style="color: var(--text-color); text-transform: uppercase; letter-spacing: 0.05em;">NexHaus
+                            Architects</strong><br>
+                        Pambaimoola, Edakochi<br>
+                        Ernakulam, Kerala
+                    </div>
+                    <div style="text-align: right; color: var(--secondary-text); font-size: 0.9rem; line-height: 1.6;">
+                        <a href="tel:+918848163269" style="color: inherit;">+91 8848163269</a><br>
+                        <a href="tel:+917902426536" style="color: inherit;">+91 7902426536</a><br>
+                        <a href="mailto:nexhaus.india@gmail.com" style="color: inherit;">nexhaus.india@gmail.com</a>
+                    </div>
                 </div>
             </div>
         </div>

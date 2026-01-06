@@ -10,17 +10,70 @@
 
 <body>
     <main style="padding-top: 120px; padding-bottom: 4rem;">
+        <style>
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6rem;
+                align-items: center;
+                margin-bottom: 8rem;
+            }
+
+            .values-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+
+            .about-text {
+                order: 1;
+            }
+
+            .about-image {
+                order: 2;
+            }
+
+            @media (max-width: 768px) {
+                .about-grid {
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                    margin-bottom: 4rem;
+                }
+
+                .values-grid {
+                    grid-template-columns: 1fr;
+                    /* Stack values */
+                    gap: 2rem;
+                }
+
+                /* Image first on mobile */
+                .about-text {
+                    order: 2;
+                }
+
+                .about-image {
+                    order: 1;
+                }
+
+                h1 {
+                    font-size: 2.5rem !important;
+                    /* Force resize header */
+                }
+            }
+        </style>
+
         <div class="container fade-in">
-            <div class="grid"
-                style="grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; margin-bottom: 8rem;">
-                <div>
-                    <h1 style="margin-bottom: 2rem; font-size: 3.5rem; line-height: 1.1;">Meaningful Design.</h1>
+            <h1 style="text-align: left; margin-bottom: 4rem; font-size: 3.5rem; line-height: 1.1;">About Us</h1>
+            <div class="about-grid">
+                <div class="about-text">
                     <p style="font-size: 1.25rem; color: var(--secondary-text); line-height: 1.6; margin-bottom: 2rem;">
-                        At Nexhaus, we believe people deserve meaningful design—not just aesthetics, but solutions that
+                        At Nexhaus, we believe people deserve meaningful design—not just aesthetics, but
+                        solutions that
                         elevate how they live.
                     </p>
                     <p style="line-height: 1.6; margin-bottom: 2rem;">
-                        We aim to demonstrate the power of design in creating purposeful, balanced, and resonant spaces
+                        We aim to demonstrate the power of design in creating purposeful, balanced, and resonant
+                        spaces
                         while being mindful of both construction costs and the value of thoughtful design.
                     </p>
                     <div style="margin-top: 3rem;">
@@ -28,26 +81,29 @@
                         <p>Kerala &bull; Karnataka</p>
                     </div>
                 </div>
-                <div>
+                <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1920&auto=format&fit=crop"
                         alt="NexHaus Office" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
 
-            <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="values-grid">
                 <div style="padding: 2rem; border-top: 1px solid var(--border-color);">
                     <h3 style="margin-bottom: 1rem;">Balance</h3>
-                    <p style="color: var(--secondary-text);">Harmonizing aesthetics with practical, livable solutions
+                    <p style="color: var(--secondary-text);">Harmonizing aesthetics with practical, livable
+                        solutions
                         ensuring every space feels right.</p>
                 </div>
                 <div style="padding: 2rem; border-top: 1px solid var(--border-color);">
                     <h3 style="margin-bottom: 1rem;">Purpose</h3>
-                    <p style="color: var(--secondary-text);">Creating spaces that are intentional and enhance the user's
+                    <p style="color: var(--secondary-text);">Creating spaces that are intentional and enhance
+                        the user's
                         daily experience.</p>
                 </div>
                 <div style="padding: 2rem; border-top: 1px solid var(--border-color);">
                     <h3 style="margin-bottom: 1rem;">Value-Driven</h3>
-                    <p style="color: var(--secondary-text);">A focus on mindful construction costs without compromising
+                    <p style="color: var(--secondary-text);">A focus on mindful construction costs without
+                        compromising
                         the integrity of thoughtful design.</p>
                 </div>
             </div>
