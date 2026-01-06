@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexHaus Architects</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-slideshow"></div>
+        <div class="hero-content fade-in">
+            <h1 style="font-weight: 300;">LOADING PROJECTS...</h1>
+            <p class="text-uppercase" style="margin-top: 1rem; letter-spacing: 0.2em;">Architecture & Design</p>
+            <a href="projects.html" class="hero-btn">View Projects</a>
+        </div>
+    </header>
+
+    <!-- Reviews Section -->
+    <section class="container" style="padding: 6rem 2rem;">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-weight: 300;">What our clients say</h2>
+        <div id="reviews-container" class="grid reviews-grid">
+            <!-- Reviews Injected Here -->
+        </div>
+    </section>
+
+    <!-- Random Blog Section -->
+    <section class="container" style="padding-bottom: 6rem;">
+        <div id="random-blog-container"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container" style="padding: 6rem 2rem;">
+        <h2 style="margin-bottom: 3rem; font-weight: 300; text-align: center;">Get in Touch</h2>
+
+        <div class="grid contact-grid">
+            <form class="auth-form" style="max-width: 100%; display: flex; flex-direction: column; gap: 1rem;">
+                <input type="text" placeholder="Name" required style="padding: 1rem; border: 1px solid #ddd;">
+                <input type="email" placeholder="Email" required style="padding: 1rem; border: 1px solid #ddd;">
+                <select style="padding: 1rem; border: 1px solid #ddd;">
+                    <option>General Enquiry</option>
+                    <option>New Project</option>
+                    <option>Press</option>
+                </select>
+                <textarea rows="5" placeholder="Message" style="padding: 1rem; border: 1px solid #ddd;"></textarea>
+                <button type="submit"
+                    style="padding: 1rem; background: #000; color: #fff; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Send
+                    Message</button>
+            </form>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="height: 400px; background: #eee;">
+                    <!-- Google Maps Embed Placeholder -->
+                    <iframe width="100%" height="100%" style="border:0; filter: grayscale(100%);" loading="lazy"
+                        allowfullscreen
+                        src="https://maps.google.com/maps?q=9.912631155672113,76.29361196753203&t=&z=15&ie=UTF8&iwloc=&output=embed">
+                    </iframe>
+                </div>
+                <div style="text-align: right; color: var(--secondary-text); font-size: 0.9rem; line-height: 1.6;">
+                    <strong style="color: var(--text-color); text-transform: uppercase; letter-spacing: 0.05em;">NexHaus
+                        Architects</strong><br>
+                    Pambaimoola, Edakochi<br>
+                    Ernakulam, Kerala
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="js/updates.js"></script>
+    <script src="projects/maya.txt"></script>
+    <script src="projects/lacasablanca.txt"></script>
+    <script src="projects/ruhaan.txt"></script>
+    <script src="projects/ira.txt"></script>
+    <script src="projects/nisarga.txt"></script>
+    <script src="projects/finecraft.txt"></script>
+    <script src="projects/aquaworld.txt"></script>
+    <script>
+        // Init
+        App.renderNav();
+        App.initHero();
+        App.initReviews();
+        App.initRandomBlog();
+        App.initContact();
+        App.renderFooter(); // Add social/footer links
+    </script>
+</body>
+
+</html>

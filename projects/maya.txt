@@ -1,0 +1,49 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'maya',
+    title: 'Maya by Maheswari',
+    category: 'Commercial',
+    image: 'images/maya/maya_02.jpg',
+    description: 'A boutique situated in Panavila, Trivandrum.',
+    isEthosphere: true,
+    gallery: [
+        'images/maya/maya_01.jpg',
+        'images/maya/maya_02.jpg',
+        'images/maya/maya_03.jpg',
+        'images/maya/maya_04.jpg',
+        'images/maya/maya_05.jpg'
+    ],
+    isConceptual: false,
+    blog: {
+        title: 'Māyah by Maheswari: The Art of Subtle Luxury',
+        date: '2025-12-01',
+        excerpt: 'A Minimalist Canvas for Handcrafted Beauty in Trivandrum',
+        content: `
+In the bustling heart of Trivandrum, retail spaces often compete for attention with loud colors and cluttered displays. Māyah by Maheswari takes a different path. It is a breath of fresh air—a boutique designed with the quiet confidence of minimalism, where the architecture steps back to let the art speak.
+
+The design language of Māyah is defined by restraint. We wanted to move away from the traditional, heavy wooden cabinetry often seen in jewelry stores. Instead, we embraced a lighter, more industrial aesthetic.
+
+The key structural feature is the custom metal pipe display system. Bent into soft curves and finished in a muted gold, these pipes frame the white display boards, creating a "floating" effect. This adds a sense of rhythm and verticality to the space without blocking visual transparency.
+
+The color palette was a deliberate and strategic choice: Cool Greys, Matte Whites, and Muted Gold.
+
+The Grey Canvas: The walls and floors are finished in a textured, concrete-like grey. This neutral, monochromatic background is crucial. Since the boutique sells vibrant, multi-colored jewelry, a colorful interior would have created visual chaos. The grey absorbs the light and allows the intricate reds, greens, and golds of the jewelry to pop.
+
+White Focal Points: The jewelry itself is mounted on pristine white boards. This high-contrast technique draws the customer's eye immediately to the product, ensuring that every earring and necklace is seen in its true color.
+
+The beauty of Māyah lies in its uncluttered layout.
+
+Open Planning: The floor space is left largely open, avoiding the "maze" effect of typical retail shops. This invites customers to walk around freely and view collections from a distance.
+
+Textural Depth: While the colors are simple, the textures are rich. The hand-plastered finish of the walls contrasts beautifully with the smooth, industrial metal racks, adding a layer of tactile luxury to the space.
+
+Māyah by Maheswari is proof that in retail design, simplicity is the ultimate sophistication. It is a space designed not just to store products, but to curate an experience.
+        `
+    }
+});

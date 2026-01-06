@@ -1,0 +1,45 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'ruhaan',
+    title: 'Ruhaan',
+    category: 'Residential',
+    image: 'images/ruhaan/ruhaan_02.jpg',
+    description: 'A tropical wonder situated in Thalassery, Kannur Kerala.',
+    isEthosphere: true,
+    gallery: [
+        'images/ruhaan/ruhaan_02.jpg',
+        'images/ruhaan/ruhaan_03.jpg',
+        'images/ruhaan/ruhaan_04.jpg',
+        'images/ruhaan/ruhaan_05.jpg'
+    ],
+    blog: {
+        title: 'Ruhaan: An Ode to the Earth in Thalassery',
+        date: '2025-10-20',
+        excerpt: 'Where Modern Geometry Meets Malabar Tradition',
+        content: `
+Ruhaan speaks a language of "Vernacular Modernity." While the silhouette is defined by bold, cubic forms and cantilevered slabs, its soul is deeply rooted in local tradition. We chose a palette that celebrates raw, honest materials, allowing the building to age gracefully alongside the surrounding tropical landscape.
+
+Design Details & Materiality
+Exposed Laterite (Vettu Kallu): The star of the project is the locally sourced laterite. By leaving the stone exposed, we honor the region's natural texture while utilizing its thermal mass to keep the interiors naturally cool.
+
+Earth & Timber: The warm reddish-brown of the masonry is complemented by rich wooden joinery and smooth earth-toned plaster, creating a seamless visual flow from the boundary wall to the facade.
+
+Biophilic Integration: Deep verandahs and balconies adorned with cascading greenery act as "green lungs," softening the masonry and inviting the outdoors in.
+
+Cultural Significance
+In a town like Thalassery, history is everywhere. Ruhaan pays homage to this by:
+
+Reimagining the Poomukham: The entrance sit-out serves as a modern version of the traditional Kerala porch—a space for social connection and shaded relaxation.
+
+Climate-Responsive Design: The use of decorative "Jali" ventilation and wide overhangs respects the ancient wisdom of Malabar architecture, designed to tackle heavy monsoons and humid summers.
+
+Ruhaan stands as a testament to the fact that modern living can—and should—remain connected to its roots.
+        `
+    }
+});

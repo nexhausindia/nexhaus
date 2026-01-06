@@ -1,0 +1,30 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'finecraft',
+    title: 'Finecraft Automobiles',
+    category: 'Industrial',
+    image: 'images/finecraft/fc_01.jpg',
+    description: 'An automobile service centre in the outskirts of Palakkad, Kerala.',
+    isConceptual: false,
+    gallery: [
+         'images/finecraft/fc_01.jpg',
+         'images/finecraft/fc_02.jpg',
+         'images/finecraft/fc_03.jpg',
+         'images/finecraft/fc_04.jpg'
+    ],
+    blog: {
+        title: 'Finecraft: Industrial Elegance',
+        date: '2025-07-30',
+        excerpt: 'Redefining the look of industrial workspaces.',
+        content: `
+This is the blog post content for Finecraft. 
+You can write multiple lines here.
+        `
+    }
+});

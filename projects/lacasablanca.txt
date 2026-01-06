@@ -1,0 +1,47 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'lacasablanca',
+    title: 'La Casa Blanca',
+    category: 'Residential',
+    image: 'images/lacasablanca/lcb_01.jpg',
+    description: 'A neo-classical residence situated in Kollam.',
+    gallery: [
+         'images/lacasablanca/lcb_01.jpg',
+         'images/lacasablanca/lcb_02.jpg',
+         'images/lacasablanca/lcb_03.jpg',
+         'images/lacasablanca/lcb_04.jpg',
+         'images/lacasablanca/lcb_05.jpg'
+    ],
+    blog: {
+        title: 'La Casa Blanca: Mediterranean Soul, Kerala Heart',
+        date: '2025-11-15',
+        excerpt: 'A Coastal Sanctuary in Kollam',
+        content: `
+In the port city of Kollam, La Casa Blanca stands as a serene departure from conventional residential design. True to its name, this "White House" blends the airy, sun-drenched aesthetics of the Mediterranean with the structural wisdom of Kerala’s colonial and vernacular past.
+
+Because cost was a primary driver, the design language focuses on geometry over demolition. We introduced the Arch as a central motif. By rounding off existing rectangular openings, we completely shifted the home’s character to a refined "Coastal Minimalist" aesthetic without the expense of major structural overhauls.
+
+Design Details: Budget-Smart Elegance
+The Power of White: A monochromatic white palette was used to mask structural imperfections, reflect the tropical heat, and create an expensive, airy feel at a low material cost.
+
+Refined Heritage: We opted to refinish rather than replace. The traditional wooden staircase balusters were retained and paired with a modern grey-and-white palette, bridging the gap between old and new.
+
+Natural Textures: To keep costs down while adding warmth, we used cane webbing and timber accents, bringing a tactile, artisanal quality to the minimalist interiors.
+
+Cultural & Historical Significance
+Kollam’s colonial maritime history is reflected in the home’s breezy, open feel.
+
+Adaptive Reuse: By choosing to renovate, we honored the home’s history while reducing the environmental impact of new construction.
+
+Modern Vernacular: We retained the traditional sloping clay-tile roof—essential for Kerala’s monsoons—while modernizing the facade to meet a contemporary lifestyle.
+
+La Casa Blanca is proof that great design isn't about the size of the budget, but the cleverness of the intervention.
+        `
+    }
+});

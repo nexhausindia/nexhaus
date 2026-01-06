@@ -1,0 +1,30 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'ira',
+    title: 'Ira',
+    category: 'Residential',
+    image: 'images/ira/ira_05.jpg',
+    description: 'A tropical bliss situated in Irikur, Kannur.',
+    gallery: [
+         'images/ira/ira_01.jpg',
+         'images/ira/ira_02.jpg',
+         'images/ira/ira_03.jpg',
+         'images/ira/ira_04.jpg',
+         'images/ira/ira_05.jpg'
+    ],
+    blog: {
+        title: 'Ira: Serenity in Design',
+        date: '2025-09-05',
+        excerpt: 'Creating a peaceful sanctuary amidst the chaos.',
+        content: `
+This is the blog post content for Ira. 
+You can write multiple lines here.
+        `
+    }
+});

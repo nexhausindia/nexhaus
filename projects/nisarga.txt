@@ -1,0 +1,28 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'nisarga',
+    title: 'Nisarga',
+    category: 'Residential',
+    image: 'images/nisarga/nisarga_01.png',
+    description: 'Residence rooted in Indian theme in Sydney, Australia.',
+    gallery: [
+         'images/nisarga/nisarga_01.png',
+         'images/nisarga/nisarga_02.png',
+         'images/nisarga/nisarga_03.jpg'
+    ],
+    blog: {
+        title: 'Nisarga: Indian Roots, Global Context',
+        date: '2025-08-12',
+        excerpt: 'Bringing traditional Indian architecture to the Australian landscape.',
+        content: `
+This is the blog post content for Nisarga. 
+You can write multiple lines here.
+        `
+    }
+});

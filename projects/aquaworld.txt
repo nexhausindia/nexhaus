@@ -1,0 +1,42 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'aquaworld',
+    title: 'Aquaworld',
+    category: 'Industrial',
+    image: 'images/aquaworld/aw_01.jpg',
+    description: 'A seafood exports company based in Ernavur, Chennai.',
+    isEthosphere: true,
+    gallery: [
+        'images/aquaworld/aw_01.jpg',
+        'images/aquaworld/aw_02.jpg',
+        'images/aquaworld/aw_03.jpg',
+        'images/aquaworld/aw_04.jpg',
+        'images/aquaworld/aw_05.jpg'
+    ],
+    blog: {
+        title: 'Fluidity in Concrete: Redefining Industrial Architecture at Aquaworld, Chennai',
+        date: '2025-06-15',
+        excerpt: 'Aquaworld Seafood Exports Factory & HQ',
+        content: `
+In the industrial belt of Ernavur, where function usually overrides form, the new Aquaworld facility stands as a bold exception. We wanted to challenge the stereotype of the "boring factory box" and instead create a corporate landmark that embodies the spirit of the brand.
+
+The core concept is simple yet powerful: bringing the ocean to the architecture.
+
+We moved away from rigid industrial lines to embrace a language of fluidity. The facade is defined by rhythmic, curvilinear white fins that wrap around the building. These aren't just decorative; they mimic the rolling waves of the sea, creating a direct visual link to the company’s seafood heritage.
+
+The Wave Tower: The vertical block acts as the anchor. The white "wave" bands create deep shadows over dark recessed windows, creating a dynamic high-contrast look that changes with the sun's position.
+
+The Floating Glass Cube: To break the heavy mass of concrete, we introduced a cantilevered glass volume. This transparent block houses the main office areas, symbolizing openness in business and adding a modern, lightweight touch to the facade.
+
+The Roof Crown: The design is topped with a sleek pergola and cascading bougainvillea, softening the hard edges and providing a green respite on the terrace.
+
+Aquaworld is more than a processing plant; it is a piece of sculpture in an industrial landscape. By blending the solidity of concrete with the fluidity of ocean waves, we’ve created a headquarters that is as dynamic as the business it houses.
+        `
+    }
+});

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | NexHaus</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="container admin-container fade-in">
+        <h2 style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">Management
+            Console</h2>
+
+        <!-- Login Form -->
+        <div class="auth-wrapper">
+            <form id="login-form" class="auth-form hidden">
+                <h3>Login Required</h3>
+                <input type="password" id="password" placeholder="Enter Password (admin123)" required>
+                <button type="submit">Access System</button>
+            </form>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="dashboard hidden">
+            <div class="flex justify-between items-center">
+                <h3>Projects</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="App.exportUpdates()" class="hero-btn"
+                        style="background: #2196F3; color: white; border: none; font-size: 0.9rem; padding: 0.5rem 1rem; margin-top: 0;">Export
+                        Config (Publish)</button>
+                    <button onclick="App.logout()"
+                        style="background: transparent; color: var(--text-color); border: 1px solid var(--border-color); padding: 0.5rem 1rem;">Logout</button>
+                </div>
+            </div>
+
+            <!-- Add Project -->
+            <!-- Add Project -->
+            <!-- Project functionality disabled by user request -->
+            <div
+                style="padding: 2rem; background: #f0f0f0; border: 1px dashed #ccc; margin-bottom: 2rem; border-radius: 8px; text-align: center;">
+                <p>Project Creation via Admin Panel is currently disabled.</p>
+            </div>
+
+            <!-- Add Educational Article -->
+            <form id="add-article-form"
+                style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem; background: #fafafa; border: 1px dashed var(--border-color); margin-bottom: 2rem; border-radius: 8px;">
+                <h4 style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0;">Add
+                    Educational Article (Standalone)</h4>
+
+                <div class="form-section">
+                    <div style="display: grid; gap: 1rem;">
+                        <!-- Link to Project Option -->
+                        <div
+                            style="display: flex; flex-direction: column; gap: 0.5rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="a-link-project" style="width: auto;">
+                                <label for="a-link-project"
+                                    style="font-size: 0.9rem; color: var(--secondary-text);">Article on Existing
+                                    Project</label>
+                            </div>
+                            <select id="a-project-select" disabled
+                                style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%; opacity: 0.6; cursor: not-allowed;">
+                                <option value="">Select a Project...</option>
+                            </select>
+                        </div>
+
+                        <input type="text" id="a-title" placeholder="Article Title" required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;">
+                        <input type="date" id="a-date" required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;">
+                        <input type="text" id="a-image" placeholder="Cover Image Path/URL"
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;">
+                        <textarea id="a-content" placeholder="Content (Paragraphs will be auto-formatted)" rows="8"
+                            required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="hero-btn"
+                    style="background: var(--text-color); border: none; cursor: pointer; align-self: flex-start;">Publish
+                    Article</button>
+            </form>
+
+            <h5 style="margin-bottom: 1rem;">Your Draft Articles (Not yet exported)</h5>
+            <div id="article-list-admin"
+                style="border: 1px solid var(--border-color); margin-bottom: 2rem; background: #fff;">
+                <!-- Article List Items -->
+            </div>
+
+            <!-- Manage Homepage Reviews -->
+            <form id="add-review-form"
+                style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem; background: #fff; border: 1px solid var(--border-color); margin-bottom: 2rem; border-radius: 8px;">
+                <h4 style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 0;">
+                    Manage Homepage Reviews</h4>
+
+                <div class="form-section">
+                    <div style="display: grid; gap: 1rem;">
+                        <input type="text" id="r-client" placeholder="Client Name" required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;">
+                        <input type="text" id="r-role" placeholder="Role / Description" required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;">
+                        <textarea id="r-text" placeholder="Review Text" rows="3" required
+                            style="padding: 0.8rem; border: 1px solid var(--border-color); width: 100%;"></textarea>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <button type="submit" class="hero-btn"
+                        style="background: var(--text-color); border: none; cursor: pointer;">Add Review</button>
+                </div>
+            </form>
+
+            <h5 style="margin-bottom: 1rem;">Active Reviews</h5>
+            <div id="review-list-admin"
+                style="border: 1px solid var(--border-color); margin-bottom: 2rem; background: #fff;">
+                <!-- Review Items -->
+            </div>
+
+            <!-- Project List -->
+            <div id="project-list" style="border: 1px solid var(--border-color);">
+                <!-- List Items -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/updates.js"></script>
+    <script src="projects/maya.txt"></script>
+    <script src="projects/lacasablanca.txt"></script>
+    <script src="projects/ruhaan.txt"></script>
+    <script src="projects/ira.txt"></script>
+    <script src="projects/nisarga.txt"></script>
+    <script src="projects/finecraft.txt"></script>
+    <script src="projects/aquaworld.txt"></script>
+    <script>
+        App.renderNav();
+        App.initAdmin();
+    </script>
+</body>
+
+</html>
