@@ -536,24 +536,30 @@ button:hover {
     }
 
     .nav-links {
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: 100%;
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: auto;
+        padding: 3rem 0;
         background-color: var(--bg-color);
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        gap: 2rem;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease-in-out;
-        z-index: 1001;
-        /* Behind the toggle button */
+        gap: 1.5rem;
+        transform: translateY(-20px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 990;
+        border-bottom: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     }
 
     .nav-links.active {
         transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-links li {
@@ -596,6 +602,33 @@ button:hover {
     /* Centering Content on Mobile */
     body {
         text-align: center;
+    }
+
+    /* Mobile Review Carousel */
+    .reviews-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.5rem;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 2rem;
+        /* Scrollbar space */
+        -webkit-overflow-scrolling: touch;
+        scroll-padding: 0 1.25rem;
+        /* Padding for snap alignment */
+        flex-wrap: nowrap;
+    }
+
+    .reviews-grid::-webkit-scrollbar {
+        height: 0;
+        /* Hide scrollbar */
+    }
+
+    .review-card {
+        flex: 0 0 85vw;
+        /* Show mostly one card */
+        width: 85vw;
+        scroll-snap-align: center;
+        text-align: left;
     }
 
     /* Specific section alignments */

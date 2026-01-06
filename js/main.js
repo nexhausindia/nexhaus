@@ -250,7 +250,6 @@ const App = (function () {
                     <li><a href="index.html" class="nav-link">HOME</a></li>
                     <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
                     <li><a href="ethosphere.html" class="nav-link">ETHOSPHERE</a></li>
-                    <li><a href="blog.html" class="nav-link">BLOG</a></li>
                     <li><a href="about.html" class="nav-link">ABOUT</a></li>
                     <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
                     ${Store.isLoggedIn()
@@ -307,6 +306,7 @@ const App = (function () {
                     <p class="text-small">© 2026 NexHaus Architects.<br>All rights reserved.</p>
                 </div>
                 <div class="flex gap-2 text-small">
+                    <a href="blog.html">Blog</a>
                     <a href="https://www.instagram.com/nexhaus_india/" target="_blank">Instagram</a>
                     <a href="#">LinkedIn</a>
                     <a href="admin.html">Admin</a>
@@ -836,6 +836,9 @@ const App = (function () {
                     </div>
                 </div>
             `).join('');
+
+            // Enable drag to scroll for mobile/desktop convenience
+            makeDraggable(container);
         }
     }
 
