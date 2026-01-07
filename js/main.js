@@ -58,6 +58,13 @@ const App = (function () {
                 const rStored = localStorage.getItem(DB_KEYS.CUSTOM_REVIEWS);
                 if (rStored) {
                     customReviews = JSON.parse(rStored);
+                    // DEDUPLICATION: Filter by unique client + text
+                    const uniqueMap = new Map();
+                    customReviews.forEach(r => {
+                        const key = r.client + '|' + r.text;
+                        if (!uniqueMap.has(key)) uniqueMap.set(key, r);
+                    });
+                    customReviews = Array.from(uniqueMap.values());
                 } else {
                     // Seed Defaults
                     customReviews = [...DEFAULT_REVIEWS];
@@ -177,7 +184,16 @@ const App = (function () {
 
         // Review Management
         addReview(review) {
-            review.id = 'rev_' + Date.now();
+            // Check for duplicate by content if ID is generic or check by ID if provided
+            const exists = customReviews.some(r =>
+                (r.id === review.id) ||
+                (r.client === review.client && r.text === review.text)
+            );
+
+            if (exists) return null; // Skip duplicate
+
+            if (!review.id) review.id = 'rev_' + Date.now();
+
             customReviews.unshift(review); // Add to top
             localStorage.setItem(DB_KEYS.CUSTOM_REVIEWS, JSON.stringify(customReviews));
             return review;
@@ -714,9 +730,92 @@ const App = (function () {
         if (!container) return;
 
         const reviews = Store.getReviews();
+        const isMobile = window.innerWidth <= 768;
 
-        // Carousel Mode if > 3 reviews
-        if (reviews.length > 3) {
+        // Mobile Layout: Native Scroll + Dots (Requested behavior)
+        if (isMobile) {
+            container.className = 'grid reviews-grid';
+            container.style = '';
+
+            // Render Reviews
+            container.innerHTML = reviews.map(r => `
+                <div class="review-card fade-in">
+                    <p class="review-text">"${r.text}"</p>
+                    <div class="review-author">
+                        <span class="client-name">${r.client}</span>
+                        <span class="client-role">${r.role}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Dots Container
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'mobile-dots-container';
+
+            // Generate Dots
+            reviews.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `dot-btn ${index === 0 ? 'active' : ''}`;
+
+                // Click to scroll
+                dot.addEventListener('click', () => {
+                    const cards = container.querySelectorAll('.review-card');
+                    if (cards[index]) {
+                        cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                });
+
+                dotsContainer.appendChild(dot);
+            });
+
+            container.parentNode.insertBefore(dotsContainer, container.nextSibling);
+
+            // Scroll Sync Logic
+            let scrollTimeout;
+            container.addEventListener('scroll', () => {
+                cancelAnimationFrame(scrollTimeout);
+                scrollTimeout = requestAnimationFrame(() => {
+                    const scrollLeft = container.scrollLeft;
+                    // Get card width including gap (approximate or calculate dynamically)
+                    // Best way: find which element is closest to center
+                    const center = container.getBoundingClientRect().width / 2;
+                    const cards = Array.from(container.querySelectorAll('.review-card'));
+
+                    let closestIndex = 0;
+                    let minDistance = Infinity;
+
+                    cards.forEach((card, index) => {
+                        const rect = card.getBoundingClientRect();
+                        // Distance of card center from container center
+                        const cardCenter = rect.left + (rect.width / 2);
+                        // We need container relative position, but rect.left is viewport relative. 
+                        // Since we just want "closest to screen center" (because of padding-centering), viewport center is fine or container center.
+                        // Container center relative to viewport:
+                        const containerRect = container.getBoundingClientRect();
+                        const containerCenter = containerRect.left + (containerRect.width / 2);
+
+                        const distance = Math.abs(cardCenter - containerCenter);
+
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+
+                    // Update Dots
+                    const dots = dotsContainer.querySelectorAll('.dot-btn');
+                    dots.forEach((d, i) => {
+                        if (i === closestIndex) d.classList.add('active');
+                        else d.classList.remove('active');
+                    });
+                });
+            });
+
+            // Clean up if resized to desktop (optional: reload page or handle resize event listeners properly)
+            // For now, simplicity assumes reload on major breakpoint change or acceptable quirkiness until reload.
+
+        } else if (reviews.length > 3) {
+            // Desktop Carousel Mode
             // Setup Container for Hidden Overflow
             container.className = 'review-carousel-container';
             // Clear styles that might interfere
@@ -823,7 +922,7 @@ const App = (function () {
             resetTimer();
 
         } else {
-            // Grid Mode (Default)
+            // Desktop Grid Mode (Few reviews)
             container.className = 'grid reviews-grid';
             container.style = '';
 
@@ -837,7 +936,7 @@ const App = (function () {
                 </div>
             `).join('');
 
-            // Enable drag to scroll for mobile/desktop convenience
+            // Enable drag to scroll for desktop convenience
             makeDraggable(container);
         }
     }
@@ -881,11 +980,13 @@ const App = (function () {
         const randomPost = posts[Math.floor(Math.random() * posts.length)];
 
         container.innerHTML = `
-            <div class="blog-featured-card fade-in" style="border: 1px solid var(--border-color); padding: 3rem; text-align: center; display: flex; flex-direction: column; align-items: center; background: #fafafa;">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <span class="text-small text-uppercase" style="letter-spacing: 0.2em; margin-bottom: 1rem; display: block;">Featured Insight</span>
-                <h3 style="font-size: 2rem; margin-bottom: 1.5rem; max-width: 800px;">${randomPost.title}</h3>
-                <p style="color: var(--secondary-text); margin-bottom: 2rem; max-width: 600px; line-height: 1.8;">${randomPost.excerpt}</p>
-                <a href="blog.html?id=${randomPost.type === 'project' ? randomPost.projectId : randomPost.id}" style="text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">Read Full Article</a>
+                <div class="blog-featured-card fade-in" style="border: 1px solid var(--border-color); padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('${randomPost.image}'); background-size: cover; background-position: center;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; max-width: 800px;">${randomPost.title}</h3>
+                    <p style="color: var(--secondary-text); margin-bottom: 1.5rem; max-width: 600px; line-height: 1.6;">${randomPost.excerpt}</p>
+                    <a href="blog.html?id=${randomPost.type === 'project' ? randomPost.projectId : randomPost.id}" style="text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">Read Full Article</a>
+                </div>
             </div>
         `;
     }
@@ -1191,6 +1292,10 @@ ${bContent.replace(/`/g, '\\`')}
     // --- Helper: Make Element Draggable ---
     function makeDraggable(element) {
         if (!element) return;
+        // Disable custom drag on touch devices OR small screens (mobile breakpoint)
+        // This ensures native CSS scroll snapping works when testing mobile view on desktop browsers.
+        if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768) return;
+
         let isDown = false;
         let startX;
         let scrollLeft;
@@ -1307,7 +1412,9 @@ App.setHiddenBlogs(${JSON.stringify(hiddenB)});
 App.addReview({
     client: "${r.client}",
     role: "${r.role}",
+    // Use exact text match for multiline strings
     text: \`${r.text.replace(/`/g, '\\`')}\` // Escape backticks
+
 });
 `;
             });

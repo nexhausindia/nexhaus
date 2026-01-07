@@ -613,9 +613,36 @@ button:hover {
         padding-bottom: 2rem;
         /* Scrollbar space */
         -webkit-overflow-scrolling: touch;
-        scroll-padding: 0 1.25rem;
-        /* Padding for snap alignment */
+
+        /* Centering Logic */
+        padding-left: calc(50% - 42.5vw);
+        padding-right: calc(50% - 42.5vw);
+
         flex-wrap: nowrap;
+        margin-bottom: 0;
+        /* Adjusted for dots */
+    }
+
+    .mobile-dots-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .dot-btn {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid var(--text-color);
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        transition: background-color 0.3s;
+    }
+
+    .dot-btn.active {
+        background-color: var(--text-color);
     }
 
     .reviews-grid::-webkit-scrollbar {
@@ -628,6 +655,8 @@ button:hover {
         /* Show mostly one card */
         width: 85vw;
         scroll-snap-align: center;
+        scroll-snap-stop: always;
+        /* Force stop at each item */
         text-align: left;
     }
 
@@ -646,28 +675,54 @@ button:hover {
     /* Details Expander */
     .expander-header {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
+        padding: 1.5rem;
     }
 
     .expander-header button {
         position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
+        top: 1rem;
+        right: 1rem;
+        background: #fff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 10;
     }
 
     .project-details-expander {
-        padding: 1.5rem 1rem;
-        /* Reduced padding */
+        padding: 0;
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        width: calc(100% + 2.5rem);
     }
 
     .project-gallery {
-        gap: 0.5rem;
+        flex-direction: column;
+        overflow-x: hidden;
+        gap: 0;
+        cursor: default;
+        padding-bottom: 0;
     }
 
     .gallery-item {
-        height: 50vh;
-        /* Smaller height for mobile */
-        max-height: 400px;
+        flex: none;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        margin-bottom: 1rem;
+        border-radius: 0;
+    }
+
+    .gallery-item img {
+        background: transparent;
+        height: auto;
+        width: 100%;
+        object-fit: cover;
     }
 
     /* Footer */
