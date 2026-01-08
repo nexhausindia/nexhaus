@@ -234,6 +234,26 @@ const App = (function () {
             // Sort by Date (Newest First)
             return allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
         },
+        initFAQ() {
+            const items = document.querySelectorAll('.faq-item');
+            items.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Toggle current
+                    const isActive = item.classList.contains('active');
+
+                    // Optional: Close others? User didn't specify "accordion" usually implies one open at a time, 
+                    // but "reveal answer" could mean independent. 
+                    // Let's make it exclusive (accordion style) for better UX.
+                    items.forEach(i => i.classList.remove('active'));
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        },
+
         login(password) {
             if (password === 'admin123') {
                 localStorage.setItem(DB_KEYS.AUTH, 'true');
@@ -324,6 +344,7 @@ const App = (function () {
                     </div>
                     <div class="flex gap-2 text-small">
                         <a href="blog.html">Blog</a>
+                        <a href="faq.html">FAQ</a>
                         <a href="https://www.instagram.com/nexhaus_india/" target="_blank">Instagram</a>
                         <a href="#">LinkedIn</a>
                         <a href="admin.html">Admin</a>
@@ -1389,6 +1410,20 @@ ${bContent.replace(/`/g, '\\`')}
             Store.toggleBlogVisibility(id);
             location.reload();
         },
+        initFAQ: () => {
+            const items = document.querySelectorAll('.faq-item');
+            items.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    items.forEach(i => i.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        },
+
         setHiddenProjects: Store.setHiddenProjects.bind(Store),
         setHiddenBlogs: Store.setHiddenBlogs.bind(Store),
         exportUpdates: () => {

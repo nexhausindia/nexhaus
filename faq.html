@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | NexHaus Architects</title>
+    <meta name="description"
+        content="Frequently Asked Questions about NexHaus Architects services, processes, and design philosophy.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            /* Bold questions */
+            cursor: pointer;
+            position: relative;
+            padding-right: 2rem;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-weight: 300;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            /* Arbitrary large height */
+            opacity: 1;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main style="padding-top: 120px; padding-bottom: 6rem;">
+        <div class="container fade-in">
+            <h1 style="text-align: center; margin-bottom: 4rem; font-weight: 300;">Frequently Asked Questions</h1>
+
+            <div class="faq-container" id="faq-list">
+                <!-- Content injected by JS or hardcoded here. 
+                     Since content is placeholder, I'll hardcode some structure for now 
+                     but let JS handle the click events. -->
+
+                <div class="faq-item">
+                    <div class="faq-question">How do you structure your fees?</div>
+                    <div class="faq-answer">
+                        <p>We believe in a transparent pricing model that works in the client's favor.</p>
+                        <p><strong>Residential Projects:</strong> We typically charge based on Square Footage.</p>
+                        <p><strong>Large-Scale/Commercial Projects:</strong> We charge a percentage of the total
+                            construction cost. We find this structure creates the most affordable and fair balance for
+                            our clients depending on the scale of the work.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is the initial consultation free?</div>
+                    <div class="faq-answer">
+                        We charge a nominal fee for our first meeting. This is because our initial consultation is not
+                        just a "meet and greet"—it is a working session. We dedicate office hours to offer professional
+                        advice, assess your site or requirements, and provide tangible value right from the start.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you have a minimum budget requirement?</div>
+                    <div class="faq-answer">
+                        No, but the design is heavily dependent on the budget you set. We ask that you take authority on
+                        defining your budget early in the process. We then work strictly within those parameters to
+                        design a project that is realistic and financially viable for you.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What happens if I don’t like the initial design? Can I make changes?</div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We believe the design must reflect your vision.</p>
+                        <p><strong>The Checklist:</strong> We start every project with a rigorous checklist to
+                            understand exactly what you like and how you envision the space.</p>
+                        <p><strong>Revisions:</strong> We allow design changes up until construction begins.</p>
+                        <p><strong>Cost:</strong> Generally, we do not charge extra for design revisions during this
+                            phase. Extra charges only apply if the changes require site visits beyond the standard
+                            requirement.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How long does the design process take?</div>
+                    <div class="faq-answer">
+                        The timeline varies by project size. Larger projects require intricate detailing to envision the
+                        design fully. We prioritize a thorough design phase because solving details on paper is much
+                        cheaper and easier than fixing mistakes on the construction site.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you build the house (Construction)?</div>
+                    <div class="faq-answer">
+                        No. We are Architects, not Contractors. We create the comprehensive "framework"—the detailed
+                        designs, drawings, and specifications—that the contractor follows. This ensures the building is
+                        constructed exactly according to the vision we created together.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you handle government permits and council approvals?</div>
+                    <div class="faq-answer">
+                        <p><strong>Low-Risk Categories:</strong> Yes, we handle the permitting process entirely.</p>
+                        <p><strong>Other Categories:</strong> The client is responsible for submitting the application,
+                            but we provide all the necessary architectural drawings and technical support to ensure the
+                            process goes smoothly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What types of projects do you specialize in?</div>
+                    <div class="faq-answer">
+                        Our portfolio is diverse. We specialize in Residential, Commercial, Heritage, and Hospitality
+                        projects. We tailor our style to the specific needs of the client rather than sticking to one
+                        rigid aesthetic.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Where are you located, and do you take out-of-station projects?</div>
+                    <div class="faq-answer">
+                        We are headquartered in Kochi, Kerala, but our footprint is expanding rapidly. We currently
+                        handle projects across Kerala, Tamil Nadu, and Karnataka. We also work internationally, with
+                        active projects in Dubai and Australia.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/updates.js"></script>
+    <script>
+        App.renderNav();
+        App.initFAQ();
+        App.renderFooter();
+    </script>
+</body>
+
+</html>
