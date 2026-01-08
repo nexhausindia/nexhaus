@@ -316,16 +316,21 @@ const App = (function () {
         footer.style.borderTop = '1px solid var(--border-color)';
         footer.style.marginTop = '4rem';
         footer.innerHTML = `
-            <div class="container flex justify-between">
-                <div>
-                    <h4 style="margin-bottom: 1rem;">NEXHAUS</h4>
-                    <p class="text-small">© 2026 NexHaus Architects.<br>All rights reserved.</p>
+            <div class="container">
+                <div class="flex justify-between" style="margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="margin-bottom: 1rem;">NEXHAUS</h4>
+                        <p class="text-small">© 2026 NexHaus Architects.<br>All rights reserved.</p>
+                    </div>
+                    <div class="flex gap-2 text-small">
+                        <a href="blog.html">Blog</a>
+                        <a href="https://www.instagram.com/nexhaus_india/" target="_blank">Instagram</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="admin.html">Admin</a>
+                    </div>
                 </div>
-                <div class="flex gap-2 text-small">
-                    <a href="blog.html">Blog</a>
-                    <a href="https://www.instagram.com/nexhaus_india/" target="_blank">Instagram</a>
-                    <a href="#">LinkedIn</a>
-                    <a href="admin.html">Admin</a>
+                <div style="border-top: 1px solid #eee; padding-top: 1.5rem; color: var(--secondary-text); font-size: 0.75rem; line-height: 1.6;">
+                    <p>Premier architectural services for School, College, Commercial, Public buildings, Residence, Hospitality, and Hospitals. <br> Serving clients across Kerala, Tamil Nadu, and Karnataka.</p>
                 </div>
             </div>
         `;

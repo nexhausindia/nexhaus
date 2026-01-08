@@ -1,0 +1,21 @@
+/* 
+   INSTRUCTIONS:
+   1. You can edit the text below.
+   2. Keep the quotes (` `) around the text.
+   3. Save this file to update the website.
+*/
+
+App.loadProject({
+    id: 'rooftopcafe',
+    title: 'Roof Top Cafe',
+    category: 'Commercial',
+    image: 'images/roof-top-cafe/roof_top_cafe_01.jpg',
+    description: 'A vibrant roof top cafe in Ernakulam, Kerala, blending modern aesthetics with lush greenery and open-air ambiance.',
+    gallery: [
+         'images/roof-top-cafe/roof_top_cafe_01.jpg',
+         'images/roof-top-cafe/roof_top_cafe_02.jpg',
+         'images/roof-top-cafe/roof_top_cafe_03.jpg',
+         'images/roof-top-cafe/roof_top_cafe_04.jpg',
+         'images/roof-top-cafe/roof_top_cafe_05.jpg'
+    ]
+});
