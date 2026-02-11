@@ -21,7 +21,7 @@
       "name": "NexHaus Architects",
       "image": "https://nexhaus.com/images/nexhaus_logo.png",
       "url": "https://nexhaus.com",
-      "telephone": "+918848163269",
+      "telephone": "+917902426536",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Pambaimoola, Edakochi",
@@ -38,18 +38,30 @@
 <body>
 
     <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-slideshow"></div>
-        <div class="hero-content fade-in">
-            <h1 style="font-weight: 300;">LOADING PROJECTS...</h1>
-            <p class="text-uppercase" style="margin-top: 1rem; letter-spacing: 0.2em;">Architecture & Design</p>
-            <a href="projects.html" class="hero-btn">View Projects</a>
-        </div>
-    </header>
+    <!-- Hero Section -->
+    <div class="hero-scroll-wrapper">
+        <header class="hero">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-content fade-in">
+                <div class="hero-logo-container">
+                    <img src="images/nexhaus_logo.png" alt="NexHaus Architects" class="hero-logo-main">
+                    <div class="hero-subtitle-spread">
+                        <span>ARCHITECTURE</span>
+                        <span>INTERIOR</span>
+                        <span>PMC</span>
+                    </div>
+                </div>
+                <a href="projects.html" class="hero-btn">View Projects</a>
+            </div>
+        </header>
+    </div>
 
     <!-- Reviews Section -->
-    <section class="container" style="padding: 3rem 2rem;">
-        <h2 style="text-align: center; margin-bottom: 3rem; font-weight: 300;">What our clients say</h2>
+    <section class="container"
+        style="padding: 3rem 2rem; border: none !important; outline: none !important; box-shadow: none !important; margin-top: 0 !important;">
+        <h2
+            style="text-align: center; margin-bottom: 3rem; font-weight: 300; border: none !important; outline: none !important; box-shadow: none !important;">
+            What our clients say</h2>
         <div id="reviews-container" class="grid reviews-grid">
             <!-- Reviews Injected Here -->
         </div>
@@ -101,8 +113,7 @@
                         Ernakulam, Kerala
                     </div>
                     <div style="text-align: right; color: var(--secondary-text); font-size: 0.8rem; line-height: 1.5;">
-                        <a href="tel:+918848163269" style="color: inherit; display: block; margin-bottom: 2px;">+91
-                            8848163269</a>
+
                         <a href="tel:+917902426536" style="color: inherit; display: block; margin-bottom: 2px;">+91
                             7902426536</a>
                         <a href="mailto:nexhaus.india@gmail.com"

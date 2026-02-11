@@ -12,8 +12,37 @@ const App = (function () {
         HIDDEN_BLOGS: 'nexhaus_hidden_blogs',
         CUSTOM_REVIEWS: 'nexhaus_custom_reviews',
         CUSTOM_ARTICLES: 'nexhaus_custom_articles', // NEW
-        UPDATES_EXPORT: 'nexhaus_updates_export'
+        UPDATES_EXPORT: 'nexhaus_updates_export',
+        PORTAL_USER: 'nexhaus_user' // Client Portal User
     };
+
+    // --- FIREBASE CONFIGURATION ---
+    // PLACEHOLDERS: User must replace these with their own from console.firebase.google.com
+    const firebaseConfig = {
+        apiKey: "AIzaSyD3ylx8dvQHxKnb9AsAAOBDZ9d6fGUqyl4",
+        authDomain: "nexhaus-1aeab.firebaseapp.com",
+        projectId: "nexhaus-1aeab",
+        storageBucket: "nexhaus-1aeab.firebasestorage.app",
+        messagingSenderId: "1085371965172",
+        appId: "1:1085371965172:web:d5ee8f12c18e311e7308a1",
+        measurementId: "G-42B0SQJ6NB"
+    };
+
+    // Initialize Firebase (Safely)
+    let auth, db;
+    try {
+        if (typeof firebase !== 'undefined') {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            // Always get instances after ensure init
+            auth = firebase.auth();
+            db = firebase.firestore();
+        }
+    } catch (e) {
+        console.warn("Firebase not initialized. Add keys to main.js", e);
+    }
+
 
     // In-Memory Storage
     let loadedProjects = [];
@@ -27,21 +56,9 @@ const App = (function () {
     const DEFAULT_REVIEWS = [
         {
             id: 1,
-            client: 'Sarah Jenkins',
-            role: 'CEO, Horizon Ventures',
-            text: 'NexHaus transformed our vision into a tangible reality. The attention to detail and the interplay of light and space in our new headquarters is simply breathtaking.'
-        },
-        {
-            id: 2,
-            client: 'Marcus Thorne',
-            role: 'Private Residence Owner',
-            text: 'Living in a NexHaus home is an experience. It\'s not just a building; it\'s a sanctuary that perfectly balances modern aesthetics with comfort.'
-        },
-        {
-            id: 3,
-            client: 'Elena Rodriguez',
-            role: 'Director, Art & Culture Foundation',
-            text: 'The gallery space they designed is a masterpiece in itself. It enhances the art without overpowering it. Truly exceptional architectural thought.'
+            client: 'Tojo',
+            role: 'Owner, Drift Car Services',
+            text: 'NexHaus helped us envision the project and even assisted with the operation planning.'
         }
     ];
 
@@ -55,21 +72,9 @@ const App = (function () {
                 const bStored = localStorage.getItem(DB_KEYS.HIDDEN_BLOGS);
                 hiddenBlogIds = bStored ? JSON.parse(bStored) : [];
 
-                const rStored = localStorage.getItem(DB_KEYS.CUSTOM_REVIEWS);
-                if (rStored) {
-                    customReviews = JSON.parse(rStored);
-                    // DEDUPLICATION: Filter by unique client + text
-                    const uniqueMap = new Map();
-                    customReviews.forEach(r => {
-                        const key = r.client + '|' + r.text;
-                        if (!uniqueMap.has(key)) uniqueMap.set(key, r);
-                    });
-                    customReviews = Array.from(uniqueMap.values());
-                } else {
-                    // Seed Defaults
-                    customReviews = [...DEFAULT_REVIEWS];
-                    localStorage.setItem(DB_KEYS.CUSTOM_REVIEWS, JSON.stringify(customReviews));
-                }
+                // FORCE RESET: Always overwrite with current DEFAULT_REVIEWS
+                customReviews = [...DEFAULT_REVIEWS];
+                localStorage.setItem(DB_KEYS.CUSTOM_REVIEWS, JSON.stringify(customReviews));
 
                 const aStored = localStorage.getItem(DB_KEYS.CUSTOM_ARTICLES);
                 if (aStored) {
@@ -265,6 +270,8 @@ const App = (function () {
         isLoggedIn() { return localStorage.getItem(DB_KEYS.AUTH) === 'true'; }
     };
 
+
+
     // --- COMPONENTS ---
     function renderNav() {
         const nav = document.createElement('nav');
@@ -288,8 +295,9 @@ const App = (function () {
                     <li><a href="ethosphere.html" class="nav-link">ETHOSPHERE</a></li>
                     <li><a href="about.html" class="nav-link">ABOUT</a></li>
                     <li><a href="index.html#contact" class="nav-link">CONTACT</a></li>
+
                     ${Store.isLoggedIn()
-                ? '<li><a href="#" onclick="App.logout()" class="nav-link" style="color: red;">LOGOUT</a></li>'
+                ? '<li><a href="#" onclick="App.logout()" class="nav-link" style="color: red;">LOGOUT (ADMIN)</a></li>'
                 : ''}
                 </ul>
             </div>
@@ -337,21 +345,20 @@ const App = (function () {
         footer.style.marginTop = '4rem';
         footer.innerHTML = `
             <div class="container">
-                <div class="flex justify-between" style="margin-bottom: 2rem;">
+                <div class="flex justify-between" style="margin-bottom: 2rem; align-items: flex-end;">
                     <div>
-                        <h4 style="margin-bottom: 1rem;">NEXHAUS</h4>
-                        <p class="text-small">© 2026 NexHaus Architects.<br>All rights reserved.</p>
+                        <img src="images/nexhaus_logo.png" alt="NexHaus" style="height: 30px; margin-bottom: 1rem; opacity: 0.8;">
+                        <p class="text-small">Architects of Modern Living.</p>
                     </div>
-                    <div class="flex gap-2 text-small">
-                        <a href="blog.html">Blog</a>
-                        <a href="faq.html">FAQ</a>
-                        <a href="https://www.instagram.com/nexhaus_india/" target="_blank">Instagram</a>
-                        <a href="#">LinkedIn</a>
-                        <a href="admin.html">Admin</a>
+                     <div style="display: flex; gap: 2rem;">
+                        <a href="https://www.instagram.com/nexhaus_india?igsh=NWR2bjVibXc5ZG82" target="_blank" class="footer-link text-small">Instagram</a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nexhaus.india@gmail.com" target="_blank" class="footer-link text-small">Gmail</a>
+                        <a href="blog.html" class="footer-link text-small">Blog</a>
+                        <a href="faq.html" class="footer-link text-small">FAQ</a>
                     </div>
                 </div>
-                <div style="border-top: 1px solid #eee; padding-top: 1.5rem; color: var(--secondary-text); font-size: 0.75rem; line-height: 1.6;">
-                    <p>Premier architectural services for School, College, Commercial, Public buildings, Residence, Hospitality, and Hospitals. <br> Serving clients across Kerala, Tamil Nadu, and Karnataka.</p>
+                <div class="text-center text-small" style="padding-top: 2rem; border-top: 1px solid #eee;">
+                    &copy; ${new Date().getFullYear()} NexHaus Architecture. All rights reserved.
                 </div>
             </div>
         `;
@@ -359,36 +366,132 @@ const App = (function () {
     }
 
     // --- APP LOGIC ---
+    // Expose Auth via App
+
+
     function initHero() {
-        const projects = Store.getProjects().slice(0, 5);
-        const slideContainer = document.querySelector('.hero-slideshow');
-        if (!slideContainer || projects.length === 0) return;
+        // --- Setup ---
+        const canvas = document.getElementById('hero-canvas');
+        if (!canvas) return; // Not on home page or missing
+        const context = canvas.getContext('2d');
+        const scrollWrapper = document.querySelector('.hero-scroll-wrapper');
 
-        projects.forEach((p, index) => {
-            const slide = document.createElement('div');
-            slide.className = `slide ${index === 0 ? 'active' : ''}`;
-            slide.style.backgroundImage = `url('${p.image}')`;
-            slideContainer.appendChild(slide);
-        });
 
-        const content = document.querySelector('.hero-content h1');
-        if (content && projects[0]) content.textContent = projects[0].title;
+        const frameCount = 120;
+        const currentFrame = index => `images/heroimage/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
 
-        let current = 0;
-        setInterval(() => {
-            const slides = document.querySelectorAll('.slide');
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
+        // --- Preload Images ---
+        const images = [];
+        let imagesLoaded = 0;
 
-            if (content) {
-                content.style.opacity = 0;
-                setTimeout(() => {
-                    content.textContent = projects[current].title;
-                    content.style.opacity = 1;
-                }, 500);
+        const preloadImages = () => {
+            for (let i = 1; i <= frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                img.onload = () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === 1) { // Render first frame immediately
+                        render();
+                    }
+                };
+                images.push(img);
             }
-        }, 5000);
+        };
+
+        // --- Canvas Rendering Logic (Cover) ---
+        // Helper to draw image "cover" style
+        const drawImageProp = (ctx, img, x, y, w, h, offsetX, offsetY) => {
+            if (arguments.length === 2) {
+                x = y = 0;
+                w = ctx.canvas.width;
+                h = ctx.canvas.height;
+            }
+
+            // Default offset is center
+            offsetX = typeof offsetX === "number" ? offsetX : 0.5;
+            offsetY = typeof offsetY === "number" ? offsetY : 0.5;
+
+            // keep bounds [0.0, 1.0]
+            if (offsetX < 0) offsetX = 0;
+            if (offsetY < 0) offsetY = 0;
+            if (offsetX > 1) offsetX = 1;
+            if (offsetY > 1) offsetY = 1;
+
+            var iw = img.width,
+                ih = img.height,
+                r = Math.min(w / iw, h / ih),
+                nw = iw * r,   // new prop. width
+                nh = ih * r,   // new prop. height
+                cx, cy, cw, ch, ar = 1;
+
+            // decide which gap to fill    
+            if (nw < w) ar = w / nw;
+            if (Math.abs(ar - 1) < 1e-14 && nh < h) ar = h / nh;  // updated
+            nw *= ar;
+            nh *= ar;
+
+            // calc source rectangle
+            cw = iw / (nw / w);
+            ch = ih / (nh / h);
+
+            cx = (iw - cw) * offsetX;
+            cy = (ih - ch) * offsetY;
+
+            // make sure source rectangle is valid
+            if (cx < 0) cx = 0;
+            if (cy < 0) cy = 0;
+            if (cw > iw) cw = iw;
+            if (ch > ih) ch = ih;
+
+            // fill image in dest. rectangle
+            ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
+        }
+
+        // --- Loop Logic (Auto-Play) ---
+        let lastTime = 0;
+        const fps = 24; // Frames per second target
+        const interval = 1000 / fps;
+        let currentFrameIndex = 0;
+
+        const loop = (timestamp) => {
+            // Calculate time elapsed
+            const delta = timestamp - lastTime;
+
+            if (delta > interval) {
+                // Update frame
+                lastTime = timestamp - (delta % interval);
+
+                currentFrameIndex = (currentFrameIndex + 1) % frameCount;
+
+                const img = images[currentFrameIndex];
+                if (img && img.complete && img.naturalWidth > 0) {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    drawImageProp(context, img, 0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            requestAnimationFrame(loop);
+        };
+
+        // --- Sizing ---
+        const handleResize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Draw current frame immediately on resize
+            const img = images[currentFrameIndex] || images[0];
+            if (img && img.complete) {
+                drawImageProp(context, img, 0, 0, canvas.width, canvas.height);
+            }
+        };
+
+        // --- Init ---
+        window.addEventListener('resize', handleResize);
+
+        handleResize(); // Initial sizing
+        preloadImages();
+        requestAnimationFrame(loop); // Start Loop
+
+
     }
 
 
@@ -453,10 +556,10 @@ const App = (function () {
 
         // Fallback hardcoded logic
         if (!project.gallery || project.gallery.length === 0) {
-            if (project.title.includes('Maya')) images = ['images/maya/maya_01.jpg', 'images/maya/maya_02.jpg', 'images/maya/maya_03.jpg', 'images/maya/maya_04.jpg', 'images/maya/maya_05.jpg'];
+            if (project.title.includes('Maya')) images = ['images/maya/maya_02.jpg', 'images/maya/maya_03.jpg', 'images/maya/maya_04.jpg', 'images/maya/maya_05.jpg', 'images/maya/maya_01.jpg'];
             else if (project.title.includes('La Casa Blanca')) images = ['images/lacasablanca/lcb_01.jpg', 'images/lacasablanca/lcb_02.jpg', 'images/lacasablanca/lcb_03.jpg', 'images/lacasablanca/lcb_04.jpg'];
             else if (project.title.includes('Nisarga')) images = ['images/nisarga/nisarga_01.png', 'images/nisarga/nisarga_02.png', 'images/nisarga/nisarga_03.jpg'];
-            else if (project.title.includes('Ira')) images = ['images/ira/ira_01.jpg', 'images/ira/ira_02.jpg', 'images/ira/ira_03.jpg', 'images/ira/ira_04.jpg'];
+            else if (project.title.includes('Ira')) images = ['images/ira/ira_new_02.jpg', 'images/ira/ira_new_03.jpg', 'images/ira/ira_new_04.jpg', 'images/ira/ira_new_01.jpg'];
             else if (project.title.includes('Finecraft')) images = ['images/finecraft/fc_01.jpg', 'images/finecraft/fc_02.jpg', 'images/finecraft/fc_03.jpg'];
             else if (project.title.includes('Ruhaan')) images = ['images/ruhaan/ruhaan_02.jpg', 'images/ruhaan/ruhaan_03.jpg', 'images/ruhaan/ruhaan_04.jpg'];
         }
@@ -491,7 +594,7 @@ const App = (function () {
                 if (blogPost && !blogPost.isHidden) {
                     return `
                         <div style="margin-top: 2rem; text-align: right;">
-                            <a href="blog.html?id=${project.id}" class="hero-btn" style="margin-top: 0; background: var(--text-color); color: #fff; font-size: 0.8rem; padding: 0.8rem 1.5rem;">
+                            <a href="blog.html?id=${project.id}" class="hero-btn" style="margin-top: 0; background: #000 !important; color: #fff !important; font-size: 0.8rem; padding: 0.8rem 1.5rem; border: 1px solid #000;">
                                 Read Project Story &rarr;
                             </a>
                         </div>
@@ -600,9 +703,9 @@ const App = (function () {
                         <span class="text-small text-uppercase" style="letter-spacing: 0.1em; font-weight: 600; color: var(--accent-color);">${post.date}</span> 
                         ${post.type === 'article' ? '<span class="text-small" style="color:var(--text-color); border:1px solid #ccc; padding:0 4px; border-radius:4px; margin-left:8px;">Article</span>' : ''}
                         
-                        <h2 class="blog-title-hover" style="margin: 1rem 0; font-size: 2.5rem; max-width: 900px;">${post.title}</h2>
+                        <h2 class="blog-title-hover" style="margin: 1rem 0; font-size: 2.5rem; max-width: 100%;">${post.title}</h2>
                         
-                        <p style="color: var(--text-color); max-width: 700px; font-size: 1.1rem; line-height: 1.6; opacity: 0.8;">${post.excerpt}</p>
+                        <p style="color: var(--text-color); max-width: 100%; font-size: 1.1rem; line-height: 1.6; opacity: 0.8;">${post.excerpt}</p>
                         
                         <button class="text-small text-uppercase" style="margin-top: 2rem; background:none; border:none; text-decoration:underline; cursor:pointer; font-weight: 600;">Read Entry</button>
                     </div>
@@ -755,7 +858,8 @@ const App = (function () {
         const container = document.getElementById('reviews-container');
         if (!container) return;
 
-        const reviews = Store.getReviews();
+        // Clone and Shuffle for random display order on each load
+        const reviews = [...Store.getReviews()].sort(() => Math.random() - 0.5);
         const isMobile = window.innerWidth <= 768;
 
         // Mobile Layout: Native Scroll + Dots (Requested behavior)
@@ -1006,11 +1110,11 @@ const App = (function () {
         const randomPost = posts[Math.floor(Math.random() * posts.length)];
 
         container.innerHTML = `
-            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; width: 100%; margin: 0 auto;">
                 <span class="text-small text-uppercase" style="letter-spacing: 0.2em; margin-bottom: 1rem; display: block;">Featured Insight</span>
                 <div class="blog-featured-card fade-in" style="border: 1px solid var(--border-color); padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('${randomPost.image}'); background-size: cover; background-position: center;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; max-width: 800px;">${randomPost.title}</h3>
-                    <p style="color: var(--secondary-text); margin-bottom: 1.5rem; max-width: 600px; line-height: 1.6;">${randomPost.excerpt}</p>
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; max-width: 100%;">${randomPost.title}</h3>
+                    <p style="color: var(--secondary-text); margin-bottom: 1.5rem; max-width: 100%; line-height: 1.6;">${randomPost.excerpt}</p>
                     <a href="blog.html?id=${randomPost.type === 'project' ? randomPost.projectId : randomPost.id}" style="text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">Read Full Article</a>
                 </div>
             </div>

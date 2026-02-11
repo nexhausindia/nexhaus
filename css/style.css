@@ -129,15 +129,22 @@ h3 {
     width: 100%;
     padding: 1.5rem 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: transparent;
+    /* Initially transparent */
+    backdrop-filter: none;
+    /* No blur initially */
     border-bottom: 1px solid transparent;
     transition: var(--transition-speed);
 }
 
 .navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    /* White on scroll */
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Optional shadow */
 }
 
 .nav-links {
@@ -174,63 +181,172 @@ h3 {
 }
 
 /* Hero Section */
+/* Hero Section */
+.hero-scroll-wrapper {
+    height: 100vh;
+    /* Full viewport height */
+    position: relative;
+    z-index: 10;
+    border: none;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+}
+
 .hero {
     height: 100vh;
     width: 100%;
     position: relative;
+    /* Back to relative */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* ensure canvas behind is visible */
+    background: #fff;
+    border: none;
 }
 
-.hero-slideshow {
+#hero-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    object-fit: cover;
+    z-index: 0;
 }
 
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    background-size: cover;
-    background-position: center;
-}
-
-/* Dark Overlay */
-.slide::after {
+/* Dark Overlay on Canvas - REMOVED */
+.hero::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.slide.active {
-    opacity: 1;
+    /* background: rgba(0, 0, 0, 0.4); Removed fade */
+    z-index: 1;
+    pointer-events: none;
+    display: none;
 }
 
 .hero-content {
-    color: #fff;
+    color: #000;
+    /* Text changed to black */
     text-align: center;
     z-index: 10;
-    /* mix-blend-mode removed for better visibility */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo-container {
+    width: 80%;
+    max-width: 400px;
+    /* Reduced from 600px */
+    margin-bottom: 2rem;
+}
+
+.hero-logo-main {
+    width: 100%;
+    height: auto;
+    /* Invert removed */
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.hero-subtitle-spread {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    /* Shift center left to align with logo text portion */
+    padding-right: 3rem;
+    box-sizing: border-box;
+    /* Ensure padding inside width */
+    color: #000;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        height: 100vh;
+        justify-content: center;
+        /* Keep logo centered vertically */
+        align-items: flex-start;
+        /* Left-align all content */
+        padding: 4rem 1rem;
+        /* Balanced padding */
+        box-sizing: border-box;
+    }
+
+    .hero-logo-container {
+        width: 90%;
+        /* Use more screen width */
+        max-width: none;
+        /* Remove max-width restriction */
+        margin: 0 0 0 0;
+        /* Remove margins */
+    }
+
+    .hero-subtitle-spread {
+        font-size: 0.85rem;
+        /* Larger to match logo text width */
+        gap: 1rem;
+        /* Wider spacing */
+        padding-left: 1.5rem;
+        /* Shift right to align with logo text */
+        padding-right: 0;
+        justify-content: flex-start;
+        /* Left-align text to match logo */
+    }
+
+    .hero-btn {
+        margin-top: 8rem;
+        /* Push button lower while logo stays centered */
+        align-self: center;
+        /* Center the button horizontally */
+    }
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 3rem;
+    /* Increased margin for spacing */
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.75);
+    /* Less transparent (0.75) */
+    /* Semi-transparent white box */
+    color: #000 !important;
+    /* Force Black text */
+    /* Black text */
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    /* Spaced out text */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* Subtle border */
+    backdrop-filter: blur(5px);
+    /* Nice glass effect */
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    color: #000 !important;
+    /* Force Black text */
+    transform: translateY(-2px);
 }
 
 /* Projects Grid */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2px;
     /* Minimal gap */
     background: var(--bg-color);
@@ -238,15 +354,37 @@ h3 {
 
 .project-card {
     position: relative;
-    aspect-ratio: 4/3;
+    /* aspect-ratio: 3/2; */
+    /* Replaced by fixed height */
+    height: 350px;
     overflow: hidden;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    line-height: 0;
+    /* Anti-gap measure */
+    font-size: 0;
+    /* Anti-gap measure */
+    background: transparent;
+    /* Reveal check */
 }
 
 .project-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    display: block;
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -260,6 +398,8 @@ h3 {
     left: 0;
     width: 100%;
     padding: 1.5rem;
+    box-sizing: border-box;
+    /* prevent width overflow */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
     color: #fff;
     opacity: 0;
@@ -327,22 +467,30 @@ h3 {
 .gallery-item {
     flex: 0 0 auto;
     /* Allow auto width based on image */
-    height: 70vh;
+    height: 80vh;
     /* Responsive height */
-    max-height: 500px;
+    max-height: 80vh;
     scroll-snap-align: center;
     border-radius: 4px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    /* Ensure centering */
+    align-items: center;
+    /* Vertically center */
+    justify-content: center;
+    /* Horizontally center */
 }
 
 .gallery-item img {
     width: auto;
     height: 100%;
+    max-width: 100%;
+    /* Prevent horizontal overflow */
     object-fit: contain;
     /* Ensure full image is visible */
-    background: #000;
-    /* Dark background for letterboxing */
+    background: transparent;
+    /* Transparent background */
 }
 
 /* Custom Scrollbar for Gallery */
@@ -732,6 +880,18 @@ button:hover {
         text-align: center;
     }
 
+    .footer-link {
+        color: var(--secondary-text);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .footer-link:hover {
+        color: var(--text-color);
+        text-decoration: underline;
+    }
+
     /* Center text in flex containers where appropriate */
     .flex.justify-between:not(.navbar .container) {
         flex-direction: column;
@@ -787,4 +947,19 @@ button:hover {
 .blog-entry:hover .blog-card-bg {
     transform: scale(1.05);
     opacity: 0.25 !important;
+}
+
+/* Mobile Footer Layout */
+@media (max-width: 768px) {
+    footer .flex.justify-between {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2rem;
+    }
+
+    footer .flex.justify-between>div:last-child {
+        width: 100%;
+        justify-content: flex-start !important;
+        /* Left-align links to match logo */
+    }
 }

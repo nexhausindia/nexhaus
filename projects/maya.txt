@@ -13,11 +13,11 @@ App.loadProject({
     description: 'A boutique situated in Panavila, Trivandrum.',
     isEthosphere: true,
     gallery: [
-        'images/maya/maya_01.jpg',
         'images/maya/maya_02.jpg',
         'images/maya/maya_03.jpg',
         'images/maya/maya_04.jpg',
-        'images/maya/maya_05.jpg'
+        'images/maya/maya_05.jpg',
+        'images/maya/maya_01.jpg'
     ],
     isConceptual: false,
     blog: {
